@@ -1,0 +1,4 @@
+!data/.gitkeep
+data/*
+node_modules/
+error.log
