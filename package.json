@@ -1,14 +1,18 @@
 {
-  "name": "copart",
+  "name": "copart.lazy-ants.com",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Copart.com high resolution photo viewer",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js"
   },
-  "author": "",
-  "license": "MIT",
+  "author": {
+    "name": "Alex Demchenko",
+    "email": "alex@lazy-ants.com",
+    "url": "https://lazy-ants.com"
+  },
+  "license": "Apache",
   "dependencies": {
     "fs": "0.0.1-security",
     "puppeteer": "^1.19.0"
