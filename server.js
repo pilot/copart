@@ -15,8 +15,8 @@ function getLotInfo(lot, lotFilePath) {
       await page2.goto('https://www.copart.com/lot/'+lot);
       
       await page2.waitFor(500);
-      await page2.screenshot({path: __dirname+'/data/'+lot+'.png'});
-      await page2.waitFor(500);
+      // await page2.screenshot({path: __dirname+'/data/'+lot+'.png'});
+      // await page2.waitFor(500);
 
       page2.waitForSelector('#mainBody > div.inner-wrap > div > div.container-fluid.lot-details-page-print > div > div:nth-child(1) > div:nth-child(3) > div > div.row.no-margin > div.col-md-7.no-padding > div.row.no-margin > div.col-md-7.col-sm-12.col-xs-12.lot-mid-col > div:nth-child(1) > div > div > div > div > div > div > div.lot-details-content > div:nth-child(1) > div > div > div:nth-child(2) > div > span').then(() => console.log('Page loaded'));
 
@@ -230,6 +230,7 @@ var server = http.createServer(function (req, res) {
       // check if lot exist
       var lotFilePath = __dirname+'/data/'+lot+'.html';
       var lotInfo = 'Oops, lot not found :(';
+      var watingTime = 8000;
 
       // lot with specific id not found
       // res.writeHead(404);
@@ -240,14 +241,20 @@ var server = http.createServer(function (req, res) {
           const lotInfo = await getLotInfo(lot, lotFilePath);
       } else {        
           console.log(`lot ${lot} exist`);
+          watingTime = 1;
       }
       
-      res.write(fs.readFileSync(lotFilePath, { encoding: 'utf8' }));
-      res.end();
+      await sleep (watingTime);
+      console.log('Response to the browser');
+      res.write('Copart lot <a href="https://copart.com/lot/' + lot +'" target="_blank">' + lot + '</a></br>');
+      res.end(fs.readFileSync(lotFilePath, { encoding: 'utf8' }));
 
-      //res.end('Copart lot <a href="https://copart.com/lot/' + lot +'">' + lot + '</a>');
-      //copart.getLotInfo(lot);
+    }
 
+    function sleep(ms) {
+      return new Promise(resolve => {
+        setTimeout(resolve, ms)
+      })
     }
 
     saveLot()
