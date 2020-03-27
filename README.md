@@ -4,7 +4,7 @@ Copart.com hight resolution photo viewer
 ### install
 
 - `$> npm install`
-- `$> npm -g nodemon`
+- `$> npm i -g nodemon`
 
 ### run & use
 
